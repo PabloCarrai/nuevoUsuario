@@ -81,6 +81,7 @@ Nota: el grupo principal que imprime depende de la configuración/creación del 
 USUARIO=juan
 CONTRASENA=SuperPassword123
 GRUPO=developers
+```
 
 Recomendaciones:
 - Evita espacios alrededor del =.
