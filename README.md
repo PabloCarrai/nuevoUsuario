@@ -77,9 +77,9 @@ Nota: el grupo principal que imprime depende de la configuración/creación del 
 ## Archivo de configuración: config.env
 `config.env` debe contener estas variables:
 
-USUARIO=juan
-CONTRASENA=SuperPassword123
-GRUPO=developers
+
+```bashUSUARIO=juanCONTRASENA=SuperPassword123GRUPO=developers
+
 
 Recomendaciones:
 - Evita espacios alrededor del =.
