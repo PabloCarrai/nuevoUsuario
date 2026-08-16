@@ -1,3 +1,78 @@
+## Flujo de trabajo del proyecto
+
+### 1) Generas una clave segura con el script crear_clave_copada.sh
+### 2) Generas el usuario(en config.env) con el script crear_usuario.sh
+
+# Documentación del script de generación y actualización de clave (Bash)
+
+## Propósito
+Este script genera una clave aleatoria y luego actualiza el campo `CONTRASENA` dentro del archivo `config.env`.
+
+## Qué hace
+1. Obtiene una longitud aleatoria para la clave.
+2. Genera una clave usando caracteres permitidos.
+3. Verifica que exista el archivo `config.env`.
+4. Modifica `config.env` reemplazando la línea que empieza con `CONTRASENA=` por el nuevo valor.
+
+## Flujo del Script
+
+### 1) Obtención de la longitud
+El script calcula `LONGITUD` usando un byte aleatorio del sistema:
+
+- Lee 1 byte desde `/dev/urandom`
+- Interpreta el byte como entero sin signo (`-tu1`)
+- Luego usa `awk` para calcular una longitud con esta lógica:
+  - `25 + ($1 % 28)`
+
+Esto produce valores entre 25 y 52 (inclusive).
+
+### 2) Generación de la clave
+Con la longitud calculada (`LONGITUD`), genera `CLAVE` filtrando caracteres desde `/dev/urandom`.
+
+- `tr -dc 'A-Za-z0-9_!@#$%^&*'`  
+  Deja únicamente caracteres permitidos:
+  - Letras mayúsculas y minúsculas
+  - Dígitos 0-9
+  - `_`
+  - `! @ # $ % ^ & *`
+
+- `head -c "$LONGITUD"`  
+  Toma exactamente `LONGITUD` caracteres.
+
+Luego asigna:
+- `NUEVA_CONTRA=$CLAVE`
+
+### 3) Verificación de `config.env`
+Antes de modificar nada, valida que exista el archivo:
+
+- Si `config.env` no existe:
+  - imprime `El archivo config.env no existe.`
+  - termina con `exit 1`
+
+### 4) Actualización del campo CONSTRASENA en config.env
+Usa `sed -i` para reemplazar la línea:
+
+- Busca la línea que coincide con:
+  - `^CONTRASENA=.*`
+- La reemplaza por:
+  - `CONTRASENA="NUEVA_CONTRA"`
+
+Comando utilizado:
+- `sed -i 's/^CONTRASENA=.*/CONTRASENA="'"$NUEVA_CONTRA"'"/' config.env
+
+## Archivo esperado: config.env
+El archivo debe existir en el mismo directorio donde se ejecuta el script, y debe contener una línea con formato similar a:
+
+CONTRASENA=alguna_clave_anterior
+
+La expresión reemplaza toda la línea que empiece con `CONTRASENA=`.
+
+## Ejemplo de uso
+
+### 1) Dar permisos de ejecución
+```bash
+chmod +x generar\_clave.sh
+
 # Documentación del Script de Creación de Usuario y Grupo (Bash)
 
 ## Propósito
