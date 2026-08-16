@@ -1,7 +1,3 @@
-# nuevoUsuario
-Script para crear usuario de manera desatendida uniendolo a un grupo en particular
-
-
 # Documentación del Script de Creación de Usuario y Grupo (Bash)
 
 ## Propósito
