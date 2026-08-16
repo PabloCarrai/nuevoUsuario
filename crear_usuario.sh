@@ -36,7 +36,7 @@ if id "$USUARIO" &>/dev/null; then
     exit 1
 else
 	# 7)	Creo el usuario 
-    useradd -m -G "$GRUPO" "$USUARIO"
+    useradd -m -s /bin/bash  -G "$GRUPO" "$USUARIO"
     echo "$USUARIO:$CONTRASENA" | chpasswd
 fi
 
