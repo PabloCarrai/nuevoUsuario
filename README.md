@@ -1,7 +1,7 @@
 ## Flujo de trabajo del proyecto
 
-### 1) Generas una clave segura con el script crear_clave_copada.sh
-### 2) Generas el usuario(en config.env) con el script crear_usuario.sh
+1. Generas una clave segura con el script crear_clave_copada.sh
+2. Generas el usuario(en config.env) con el script crear_usuario.sh
 
 # Documentación del script de generación y actualización de clave (Bash)
 
