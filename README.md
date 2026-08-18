@@ -71,7 +71,8 @@ La expresión reemplaza toda la línea que empiece con `CONTRASENA=`.
 
 ### 1) Dar permisos de ejecución
 ```bash
-chmod +x generar\_clave.sh
+chmod +x generar_clave.sh
+```
 
 # Documentación del Script de Creación de Usuario y Grupo (Bash)
 
